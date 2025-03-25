@@ -148,7 +148,13 @@
     margin-bottom: 1rem;
     color: #333;
   }
-  
+
+  /* Section Background */
+  .section {
+    padding: 3rem 1rem;
+    background-color: #f0fffc;
+  }
+
   /* Experience / About / Skills */
   .job {
     margin-bottom: 2rem;
@@ -181,4 +187,6 @@
   .footer p {
     margin: 0;
   }
+  
+
   
