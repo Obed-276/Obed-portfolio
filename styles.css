@@ -1,0 +1,184 @@
+/* Global Resets & Body Style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fefefe;
+    color: #333;
+  }
+  
+  /* Navbar & Header */
+  .header {
+    background: #111;
+    padding: 1rem 0;
+  }
+  .nav-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-title {
+    color: #fff;
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Hero / Animated Background */
+  .hero-section {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    color: #fff;
+    overflow: hidden;
+  }
+  .animated-bg {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(45deg, #8e2de2, #4a00e0);
+    position: relative;
+  }
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+  }
+  .hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .intro-text {
+    font-size: 1.1rem;
+  }
+  
+  /* Circle Bubbles */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: floatUp 10s infinite ease-in-out;
+  }
+  /* Example bubble classes -- change color, size, & left position as needed */
+  .b1 {
+    width: 150px;
+    height: 150px;
+    background-color: rgba(255,255,255,0.2);
+    left: 10%;
+    animation-delay: 0s;
+  }
+  .b2 {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255,255,255,0.3);
+    left: 30%;
+    animation-delay: 1s;
+  }
+  .b3 {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255,255,255,0.2);
+    left: 50%;
+    animation-delay: 3s;
+  }
+  .b4 {
+    width: 120px;
+    height: 120px;
+    background-color: rgba(255,255,255,0.25);
+    left: 70%;
+    animation-delay: 5s;
+  }
+  .b5 {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255,255,255,0.4);
+    left: 85%;
+    animation-delay: 2s;
+  }
+  
+  /* Bubble keyframe animation */
+  @keyframes floatUp {
+    0% {
+      bottom: -200px;
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(30px) scale(1.1);
+    }
+    100% {
+      bottom: 100%;
+      transform: translateX(-20px) scale(1);
+    }
+  }
+  
+  /* Shared Container for sections */
+  .section {
+    padding: 3rem 1rem;
+  }
+  .container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Section Titles */
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Experience / About / Skills */
+  .job {
+    margin-bottom: 2rem;
+  }
+  .job h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .job p {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  .job ul {
+    list-style: disc;
+    margin-left: 2rem;
+  }
+  
+  /* Contact Section */
+  .contact-section p {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    background: #111;
+    color: #fff;
+    padding: 1rem;
+  }
+  .footer p {
+    margin: 0;
+  }
+  
