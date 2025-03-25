@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Code Samples</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      border-left: 4px solid #6a00ff;
+    }
+    h3 {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Project Code Snippets</h2>
+
+    <h3>Python – Cleaning & Analyzing a Fictional Band Data</h3>
+    <pre><code>
+        import numpy as np
+        import pandas as pd
+        
+        # Load data from the CSV file into the DataFrame
+        csv_file = "Band_Performances.csv"
+        bandperf_df = pd.read_csv(csv_file)
+        
+        # Examine the data
+        bandperf_df.info()
+        bandperf_df.shape
+        bandperf_df.dtypes
+        bandperf_df.describe()
+        bandperf_df.describe (include = 'all')
+        
+        # Verify Totals: calculate the total records and sum TotalRev in your DataFrame.
+        bandperf_df ['TotalRev'].sum()
+        row_count = bandperf_df.shape[0]
+        total_revenue = bandperf_df['TotalRev'].sum()
+        
+        print (f"Row count: {row_count}")
+        print(f"Total Revenue: {total_revenue}")
+        
+        # Check for missing values:
+        bandperf_df.isnull().sum()
+        
+        # Fix the missing values: set the Genre NaN records = "NA"
+        genre = "NA"
+        bandperf_df['Genre'] = bandperf_df['Genre'].fillna (genre).astype(object)
+        bandperf_df.isnull().sum()
+        
+        # Recheck for missing values, are they all Zero?
+        bandperf_df.isnull().sum()
+        
+        # The State_Abbr field has Texas spelled out, replace the value with TX.
+        bandperf_df['State_Abbr'] = bandperf_df['State_Abbr'].replace("Texas", "TX")
+        bandperf_df.query("State_Abbr == 'TX'")
+        
+        # Convert the Performance_Date from datatype object to datetime
+        bandperf_df[ 'Performance_Date']  = pd.to_datetime(bandperf_df[ 'Performance_Date'])
+        
+        # Create a new column for the 'Year_Qtr' column by formatting 'Performance_Date' with the to_period function
+        bandperf_df ['Year_Qtr'] = bandperf_df['Performance_Date'].dt.to_period('Q')
+        
+        # Create a new column of your choice using either the bin_edges and bin Lables approach or the Lambda function
+        bandperf_df[ 'Genre_Grouper'] = bandperf_df['Genre'].apply(lambda x: 'Piano_Chords' if x == 'Jazz' else 'Other')
+        
+        # Review the distributions of your newly created group (record count) using the groupby function
+        bandperf_df.groupby('Genre_Grouper').describe()
+        
+        # How many unique Genres are in the data?
+        bandperf_df['Genre'].nunique()
+        
+        # Print out the unique list of Genres in the data:
+        bandperf_df['Genre'].unique()
+        
+        # What is the sum of TotalRev by State_Abbr
+        totalrev_state = bandperf_df.groupby('State_Abbr')['TotalRev'].sum()
+        print(totalrev_state)
+        
+        # What is the Average TotalRev by State_Abbr
+        avgrev_state = bandperf_df.groupby('State_Abbr')['TotalRev'].mean()
+        print(avgrev_state)
+        
+        # Using the Boolean mask technique, filter your dataframe where TotalRev > 15000 and State_Abbr = CA
+        print(bandperf_df['TotalRev'] > 15000) & (bandperf_df.State_Abbr == 'CA')
+        
+        # Using the query method, filter your dataframe where Performance_Date between 2/1/09-6/30/09 and save the results to a new dataframe with your filtered results
+        filtered_band_df = pd.DataFrame()
+        filtered_band_df = bandperf_df.query("'2/1/09' <= Performance_Date <= '6/30/09'")
+        print(filtered_band_df)
+        
+        # Sort your newly created dataframe by Performance Date (descending) and Band_Name (ascending)
+        filtered_band_df = filtered_band_df.sort_values(by=['Performance_Date', 'Band_Name'], ascending=[False, True])
+        print(filtered_band_df)
+    </code></pre>
+
+
+    <h3>Python – Generate a simple pivot table for vizualization</h3>
+    <pre><code>
+        # Import Python Libraries
+        import pandas as pd  # data analysis Library
+        import numpy as np  # use for working with numeric/math functions
+        # Create a blank DataFrame named df_performances
+        df_performances = pd.DataFrame()
+        # Load data from the CSV file into the DataFrame
+        df_performances = pd.read_csv('Performances_By_Venue_Zip.csv')
+        
+        # Print the results of your dataframe
+        df_performances
+        
+        # inspect the dataframe
+        ##summary of descriptive statistics
+        df_performances.describe(include='all')
+        
+        ## Number of Rows and Columns
+        df_performances.shape
+        
+        ## Summary of Column Names, Data Types and Nulls
+        df_performances.info()
+        
+        # Create a blank DataFrame named df_zip_info
+        df_zip_info = pd.DataFrame()
+        # Load data from the JSON Zip Code file into the DataFrame
+        df_zip_info = pd.read_json("Zip_Code.json", lines=True)
+        
+        # Print the results of your dataframe
+        df_zip_info
+        
+        # inspect your dataframe
+        ##summary of descriptive statistics
+        df_zip_info.describe(include='all')
+        
+        ## Number of Rows and Columns
+        df_zip_info.shape
+        
+        ## Summary of Coloum Names, Data Types and Nulls
+        df_zip_info.info()
+        
+        # Perform the join between df_performances and df_zip_info dataframes
+        df_performance_zip_stats = pd.merge(df_performances, df_zip_info,
+                                            left_on='ZIP_CODE',
+                                            right_on='zip_code_tabulation_area',
+                                            how='inner')
+        
+        # Print the results of your dataframe
+        df_performance_zip_stats
+        
+        df_performance_zip_stats.info()
+        
+        df_performance_zip_stats[[
+            'Venue_Name', 'STATE_ABBR', 'Average_Revenue_Amount', 'ZIP_CODE']]
+        
+        # Format the columns
+        pivot_table['Total_Revenue_Amount'] = pivot_table[
+            'Total_Revenue_Amount'].apply('${:,.2f}'.format)
+        pivot_table['Average_Revenue_Amount'] = pivot_table[
+            'Average_Revenue_Amount'].apply('${:,.2f}'.format)
+        pivot_table['Unique_Performances'] = pivot_table[
+            'Unique_Performances'].astype(int).map('{:,}'.format)
+        
+        pivot_table
+        
+    </code></pre>
+    
+
+    <h3>Python – Connecting my python IDE to a local SQL database to generate visuals</h3>
+    <pre><code>
+        import pyodbc
+        import pandas as pd
+        svr = "essql1.walton.uark.edu"
+        uid = "ua_hallux_user"
+        pwd = "GohogsUA1"
+        db = "ua_hallux_5103"
+        cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server);SERVER='+svr+';DATABASE='+db+';UID='+uid+';PWD='+pwd+')
+
+        sql_query = """
+        SELECT IT.Item_Type, I.Item_Description,
+        Count(DISTINCT OD.Order_Id) as Unique_Orders,
+        AVG(OD.Quantity) as Average_Quantity_Ordered
+        FROM Order_Header OH
+        INNER JOIN Order_Detail OD ON OH.Order_Id = OD.Order_Id
+        INNER JOIN Item I ON OD.Item_ID = I.Item_ID
+        INNER JOIN Item_Type IT ON I.Item_Type_ID = IT.Item_Type_ID
+        WHERE YEAR(Order_Date) = 2014
+        AND IT.Item_Type = 'Album'
+        GROUP BY IT.Item_Type, I.Item_Description
+        ORDER BY Unique_Orders ASC
+        """
+        df_query_results = pd.read_sql_query(sql_query, cnxn)
+        cnxn.close()
+
+        param_values = (2014, 'TX')
+        stored_procedure = "EXEC dbo.usp_hw3c_perf_state_abbr @Year = ?, @State_Abbr = ?"
+        df_stored_procedure_results = pd.read_sql_query(stored_procedure, cnxn, params=param_values)
+        cnxn.close()
+
+        import pandas as pd
+        import requests
+        population_year = '2016'
+        measure_name = 'Median Household Income'
+        response = requests.get(f'https://datausa.io/api/data?drilldowns=State&measures=Population&Year={population_year}')
+        if response.ok:
+            state_pop = response.json()
+        else:
+        print(f'Request was not successful and returned code: {response.status_code}.')
+        state_pop = None
+        df_state_measure = pd.DataFrame(state_pop['data'])
+    </code></pre>
+
+
+    <h2>SOME SQL QUERIES</h2>
+    <h3>SQL – CTEs, Window Functions & Customer Segmentation </h3>
+    <pre><code>
+        Window Function Examples:
+        --Ranking Functions: 
+        SELECT State_Abbr, City, SUM(p.Revenue) as TotalRev,
+        
+        RANK() OVER(PARTITION BY State_Abbr ORDER BY SUM(p.Revenue) DESC) as StateRank,
+        RANK() OVER(ORDER BY SUM(p.Revenue) DESC) as OverallRank,
+        NTILE(4) OVER(ORDER BY SUM(p.Revenue) DESC) as QuartRank
+        
+        FROM ZIP_Code z, Performance p, Venue v
+        WHERE z.ZIP_Code = v.ZIP_Code
+        and p.Venue_Id = v.Venue_Id
+        GROUP BY State_Abbr, City
+        ORDER BY State_Abbr, City
+        
+        --Aggregate Functions: 
+        SELECT State_Abbr, City, SUM(p.Revenue) as TotalRev,
+        
+        COUNT(SUM(p.Revenue)) OVER(PARTITION BY State_Abbr) as StateCount,
+        SUM(SUM(p.Revenue)) OVER(PARTITION BY State_Abbr) as StateTotal,
+        AVG(SUM(p.Revenue)) OVER(PARTITION BY State_Abbr) as StateAvg
+        
+        FROM ZIP_Code z, Performance p, Venue v
+        WHERE z.ZIP_Code = v.ZIP_Code
+        and p.Venue_Id = v.Venue_Id
+        GROUP BY State_Abbr, City
+        ORDER BY State_Abbr, City
+        
+        --Moving sums and averages
+        SELECT State_Abbr, City, SUM(p.Revenue) as TotalRev,
+        COUNT(SUM(p.Revenue)) OVER(PARTITION BY State_Abbr ORDER BY City) as StateCount,
+        SUM(SUM(p.Revenue)) OVER(PARTITION BY State_Abbr ORDER BY City) as StateTotal,
+        AVG(SUM(p.Revenue)) OVER(PARTITION BY State_Abbr ORDER BY City) as StateAvg
+        
+        FROM ZIP_Code z, Performance p, Venue v
+        WHERE z.ZIP_Code = v.ZIP_Code
+        and p.Venue_Id = v.Venue_Id
+        GROUP BY State_Abbr, City
+        ORDER BY State_Abbr, StateCount
+        
+        --Analytic – Lag & Lead
+        SELECT State_Abbr, City, SUM(p.Revenue) as TotalRev,
+        
+        LAG(SUM(p.Revenue), 1) OVER(PARTITION BY State_Abbr ORDER BY SUM(p.Revenue) DESC) as NextHigher,
+        LEAD(SUM(p.Revenue), 1) OVER(PARTITION BY State_Abbr ORDER BY SUM(p.Revenue) DESC) as NextLower
+        
+        FROM ZIP_Code z, Performance p, Venue v
+        WHERE z.ZIP_Code = v.ZIP_Code
+        and p.Venue_Id = v.Venue_Id
+        GROUP BY State_Abbr, City
+        ORDER BY State_Abbr, TotalRev DESC
+
+
+        Exec usp_1_demo '2014', 'RAP', 'Abigail Morison'
+        Exec usp_1_demo '2013', 'Country', 'All'
+        Exec usp_1_demo 'All', 'All', 'All'
+
+        select * 
+        from table_a left join table_b on table_a.person_id = Table_b.person_id
+
+        select person_id, person 
+        from Table_A
+        union 
+        select person_id, person 
+        from Table_B
+
+        select Person, CAST(Person_id as VARCHAR(50))  
+        from Table_A
+        union 
+        select Person, CAST(Person_id as VARCHAR(50)) 
+        from Table_B
+
+        -- Datasource
+        select *, 'Table_A' as DataSource 
+        from Table_A
+        union 
+        select *, 'Table_B' as DataSource 
+        from Table_B
+        order by Person 
+
+        SELECT 'Average Order Amount (Source = 4)' as Measure_Name, AVG(Total_Amount) as AVG_TOTAL_AMOUNT
+        FROM Order_header
+        WHERE Order_Source_Id = 4
+
+        UNION ALL
+
+        SELECT 'Count of Orders (Source = 3)' as Measure_Name, COUNT(Order_Id) as COUNT_OF_ORDERS
+        FROM Order_header
+        WHERE Order_Source_Id = 3
+
+        UNION ALL
+
+        SELECT 'Total Order Amount (Source = 2)' as Measure_Name, SUM(Total_Amount) as TOTAL_TOTAL_AMOUNT
+        FROM Order_header
+        WHERE Order_Source_Id = 2
+
+        UNION ALL
+
+        SELECT 'Average Order Amount (Source = 1)' as Measure_Name, SUM(Total_Amount) as TOTAL_TOTAL_AMOUNT
+        FROM Order_header
+        WHERE Order_Source_Id = 1
+
+
+        --Subqueries starts here 
+        Select Order_Id,Total_Amount
+        FROM Order_Header
+        WHERE Total_Amount > (Select AVG(Total_Amount) FROM Order_Header)
+
+        Select AVG(Total_Amount) FROM Order_Header
+
+        SELECT *
+        FROM	(
+                    SELECT * 
+                    FROM Customer
+                    WHERE ZIp_Code LIKE '72%'
+                ) as Customer_Table_72
+
+        SELECT * 
+        FROM Customer
+        WHERE ZIp_Code LIKE '72%'
+
+        --Working with memories is  like temporary tables
+
+        SELECT * 
+        INTO #Customer_with_Zip_code_72
+        FROM Customer
+        WHERE ZIp_Code LIKE '72%'
+
+        SELECT * FROM #Customer_with_Zip_code_72
+
+        SELECT *
+        FROM Order_Header OH
+        INNER JOIN Customer C on OH.customer_id = C.Customer_id
+
+
+        SELECT C.Name, 
+                SUM(Total_AMount) AS Total_AMount,
+                AVG(Total_Amount) AS AVG_Amount,
+                    (Select AVG(Total_Amount) 
+                    FROM Order_Header) as Overall_AVG_Amount,
+                    AVG(Total_Amount) - (Select AVG(Total_Amount) FROM Order_Header) AS Diff
+        FROM Order_Header OH
+        INNER JOIN Customer C on OH.customer_id = C.Customer_id
+        GROUP BY c.name
+        ORDER BY AVG(Total_Amount) DESC
+
+
+        --Using Parameters one more time
+        DECLARE @benchmark as money
+        SET @benchmark = (Select AVG(Total_Amount) FROM Order_Header)
+
+        SELECT C.Name, 
+                SUM(Total_AMount) AS Total_AMount,
+                AVG(Total_Amount) AS AVG_Amount,
+                @benchmark AS Benchmark, 
+                AVG(Total_Amount) - @benchmark AS Diff
+        FROM Order_Header OH
+        INNER JOIN Customer C on OH.customer_id = C.Customer_id
+        GROUP BY c.name
+        ORDER BY AVG(Total_Amount) DESC
+    </code></pre>    
+    </div>
+</body>
+</html>
