@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Obed Asare - Portfolio</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Optional: A Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Obed Asare - Portfolio</title>
+  
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  
+    <!-- Your custom stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  
 <body>
-  <!-- HEADER / NAVIGATION -->
   <header class="header">
     <div class="nav-container">
       <h1 class="site-title">Hi, I'm Obed!</h1>
@@ -28,7 +31,6 @@
     </div>
   </header>
 
-  <!-- HERO / ANIMATED BACKGROUND SECTION -->
   <section class="hero-section">
     <div class="animated-bg">
       <div class="bubble b1"></div>
@@ -37,106 +39,97 @@
       <div class="bubble b4"></div>
       <div class="bubble b5"></div>
       <div class="hero-content">
-        <h2> Data & BI Analyst</h2>
-        <p class="intro-text">
-        Tell stories from numbers. Build Dashboards. Inform Decisions  
-        </p>
+        <h2>Data & BI Analyst</h2>
+        <p class="intro-text">Tell stories from numbers. Build Dashboards. Inform Decisions</p>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT SECTION -->
-  <section id="about" class="section about-section">
+  <section id="about" class="section">
     <div class="container">
-      <h2>About Me</h2>
+      <h2 class="section-title">About Me</h2>
       <p>
-        I am a result-oriented Data & BI Analyst with 4+ years of experience in data analytics, business intelligence, 
-        and solutions development across multiple sectors. I excel in designing ETL pipelines, data warehousing & modeling, 
-        and advanced analytics using SQL, Python, R, and more. I love tackling messy & complex data problems
-        and turning them into actionable insights for both technical and non-technical audience using visualizations.
+        I am a result-oriented Data & BI Analyst with 4+ years of experience in data analytics, business intelligence, and solutions development across multiple sectors...
       </p>
     </div>
   </section>
 
-<!-- PROJECTS SECTION -->
-<section id="projects" class="section projects-section">
-  <div class="container">
-    <h2>Projects</h2>
-    <p>
-      <a href="https://www.semanticscholar.org/paper/Analyzing-the-incidence%2C-survival%2C-and-demographic-Nnawuba-Uche/6088a7faceb73fa72db50fe73f206418e2f0e440" target="_blank">
-        Analyzing the Incidence, Survival, and Demographic Trends of B-cell Prolymphocytic Leukemia
-      </a>
-    </p>
-  </div>
-</section>
-
-<!-- SKILLS SECTION -->
- <section id="skills" class="section skills-section">
+  <section id="projects" class="section projects-section">
     <div class="container">
-      <h2 class="skills-title">Skill Set</h2>
+      <h2 class="section-title">Projects</h2>
+      <p>
+        <a href="https://www.semanticscholar.org/paper/Analyzing-the-incidence%2C-survival%2C-and-demographic-Nnawuba-Uche/6088a7faceb73fa72db50fe73f206418e2f0e440" target="_blank">
+          Analyzing the Incidence, Survival, and Demographic Trends of B-cell Prolymphocytic Leukemia
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title">Skill Set</h2>
       <div class="skills-badges">
-        <a href="skills.html#languages" class="skill-badge">SQL</a>
-        <a href="skills.html#languages" class="skill-badge">Python</a>
-        <a href="skills.html#languages" class="skill-badge">R</a>
-        <a href="skills.html#etl" class="skill-badge">ETL</a>
-        <a href="skills.html#cloud" class="skill-badge">Azure</a>
-        <a href="skills.html#techniques" class="skill-badge">Regression</a>
-        <a href="skills.html#techniques" class="skill-badge"> Time Series & Forecasting</a>
-        <a href="skills.html#methodologies" class="skill-badge">Agile</a>
-        <a href="skills.html#methodologies" class="skill-badge">Scrum</a>
-        <a href="skills.html#methodologies" class="skill-badge">S/4HANA</a>
-        <a href="skills.html#methodologies" class="skill-badge">EDA</a>
-        <a href="skills.html#methodologies" class="skill-badge">SSIS/SSRS/SSAS</a>
-        <a href="skills.html#methodologies" class="skill-badge">Data Science & Stats Modeling</a>
+        <span class="skill-badge">SQL</span>
+        <span class="skill-badge">Python</span>
+        <span class="skill-badge">R</span>
+        <span class="skill-badge">ETL</span>
+        <span class="skill-badge">Azure</span>
+        <span class="skill-badge">Regression</span>
+        <span class="skill-badge">Time Series & Forecasting</span>
+        <span class="skill-badge">Agile</span>
+        <span class="skill-badge">Scrum</span>
+        <span class="skill-badge">S/4HANA</span>
+        <span class="skill-badge">EDA</span>
+        <span class="skill-badge">SSIS/SSRS/SSAS</span>
+        <span class="skill-badge">Data Science & Stats Modeling</span>
       </div>
     </div>
   </section>
-  
-<!-- EXPERIENCE SECTION -->
-<section id="experience" class="section experience-section">
-  <div class="container">
-    <h2 class="section-title">Experience</h2>
 
-    <div class="company-entry">
-      <img src="ua-logo.jpg" alt="UA Logo" class="company-logo" />
-      <div class="company-info">
-        <p class="job-title"><em>Data Analyst, 2022 – Present</em></p>
-        <h3>UA Center for Statistical Research & Consulting,  Fayetteville AR.</h3>
+  <section id="experience" class="section experience-section">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="company-entry">
+        <img src="images/ua-logo.jpg" alt="UA Logo" class="company-logo" />
+        <div class="company-info">
+          <p class="job-title"><em>Data Analyst, 2022 – Present</em></p>
+          <h3>UA Center for Statistical Research & Consulting, Fayetteville AR.</h3>
+        </div>
+      </div>
+
+      <div class="company-entry">
+        <img src="images/arkansas-logo.jpeg" alt="University of Arkansas Logo" class="company-logo" />
+        <div class="company-info">
+          <p class="job-title">Graduate Research and Teaching Assistant, 2022 – 2025</p>
+          <h3>University of Arkansas, Fayetteville AR.</h3>
+        </div>
+      </div>
+
+      <div class="company-entry">
+        <img src="images/gabs-logo.png" alt="GABS Research Logo" class="company-logo" />
+        <div class="company-info">
+          <p class="job-title">Junior Data Analyst, 2020 – 2021</p>
+          <h3>GABS Research Consult Limited, Accra</h3>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="company-entry">
-      <img src="arkansas-logo.jpeg" alt="University of Arkansas Logo" class="company-logo" />
-      <div class="company-info">
-        <p class="job-title"><em>Graduate Research and Teaching Assistant, 2022 – 2025</em></p>
-        <h3>University of Arkansas, Fayetteville AR.</h3>
-      </div>
-    </div>
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p>
+        Feel free to reach out if you’d like to discuss
 
-    <div class="company-entry">
-      <img src="gabs-logo.png" alt="GABS Research Logo" class="company-logo" />
-      <div class="company-info">
-        <p class="job-title"><em>Junior Data Analyst, 2020 – 2021</em></p>
-        <h3>GABS Research Consult Limited, Accra</h3>
-      </div>
-    </div>
-
-  </div> <!-- ✅ This closing tag was missing -->
-</section>
-
-
-
-  <!-- CONTACT SECTION -->
-<section id="contact" class="section contact-section">
-  <div class="container">
-    <h2>Contact</h2>
-    <p>
-      Feel free to reach out if you’d like to discuss potential collaborations, job opportunities, or just talk data!
-    </p>
-  </div>
-</section>
-
-<!-- FLOATING CONTACT ICONS -->
+        <div class="floating-contact-icons">
+  <a href="mailto:youremail@example.com" target="_blank">
+    <i class="fas fa-envelope"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/your-linkedin" target="_blank">
+    <i class="fab fa-linkedin"></i>
+  </a>
+</div>
 <div class="floating-contact-icons">
   <a href="mailto:obedasare43@gmail.com" target="_blank">
     <i class="fas fa-envelope"></i>
@@ -146,10 +139,3 @@
   </a>
 </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>&copy; 2025 Obed Asare</p>
-  </footer>
-
-</body>
-</html>
