@@ -8,11 +8,11 @@
     <!-- Font Awesome CDN -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous"
     />
   
     <!-- Custom stylesheet -->
-    <link rel="icon" type="image/png" href="./images/obed-fav.png" />
+    <link rel="icon" type="image/png" href="./images/obed-fav.png" sizes="32x32" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   
@@ -65,14 +65,14 @@
     <div class="container">
       <h2 class="section-title">Project</h2>
       <p>
-        <a href="https://www.semanticscholar.org/paper/Analyzing-the-incidence%2C-survival%2C-and-demographic-Nnawuba-Uche/6088a7faceb73fa72db50fe73f206418e2f0e440" target="_blank">
-          Analyzing the Incidence, Survival, and Demographic Trends of B-cell Prolymphocytic Leukemia
+        <a href="https://www.semanticscholar.org/paper/Analyzing-the-incidence%2C-survival%2C-and-demographic-Nnawuba-Uche/6088a7faceb73fa72db50fe73f206418e2f0e440" target="_blank" title="Analyzing the Incidence, Survival, and Demographic Trends of B-cell Prolymphocytic Leukemia">
+          B-cell Leukemia Study
         </a>
       </p>
     </div>
   </section>
 
-  <section id="projects" class="section">
+  <section id="work-samples" class="section">
     <div class="container project-content">
       <h2>Work Samples</h2>
       <a href="project-details.html" target="_blank">
@@ -114,7 +114,7 @@
       <h2 class="section-title">Experience</h2>
 
       <div class="company-entry">
-        <img src="ua-logo.jpg" alt="UA Logo" class="company-logo" />
+        <img src="ua-logo.jpg" alt="UA Logo" class="company-logo" width="150" height="150" />
         <div class="company-info">
           <p class="job-title"><em>Data Analyst, 2023 – Present</em></p>
           <h3>UA Center for Statistical Research & Consulting, Fayetteville AR.</h3>
@@ -122,7 +122,7 @@
       </div>
 
       <div class="company-entry">
-        <img src="arkansas-logo.jpeg" alt="University of Arkansas Logo" class="company-logo" />
+        <img src="arkansas-logo.jpeg" alt="University of Arkansas Logo" class="company-logo" width="150" height="150" />
         <div class="company-info">
           <p class="job-title">Graduate Research and Teaching Assistant, 2022 – 2025</p>
           <h3>University of Arkansas, Fayetteville AR.</h3>
@@ -130,7 +130,7 @@
       </div>
 
       <div class="company-entry">
-        <img src="gabs-logo.png" alt="GABS Research Logo" class="company-logo" />
+        <img src="gabs-logo.png" alt="GABS Research Logo" class="company-logo" width="150" height="150" />
         <div class="company-info">
           <p class="job-title">Junior Data Analyst, 2020 – 2021</p>
           <h3>GABS Research Consult Limited, Accra</h3>
@@ -146,7 +146,7 @@
         Connect with me and let's talk about what the data is telling you!
 
         <div class="floating-contact-icons">
-  <a href="mailto:youremail@example.com" target="_blank">
+  <a href="mailto:obedasare43@gmail.com" target="_blank">
     <i class="fas fa-envelope"></i>
   </a>
   <a href="https://www.linkedin.com/in/your-linkedin" target="_blank">
@@ -173,7 +173,10 @@
         <i class="fab fa-github"></i>
       </a>
     </div>
-    <p>© 2025 Obed Asare. All Rights Reserved.</p>
+    <p>© <span id="current-year"></span> Obed Asare. All Rights Reserved.</p>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
   </div>
 </footer>
 
