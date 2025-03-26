@@ -130,10 +130,10 @@
     <h3>Python – Generate a simple pivot table for vizualization</h3>
 
     <div class="description">
-        For this visuals preparation code below, I achieved 2 major goals:
+        For this visuals preparation code below, I achieved 2 major goals specifically using pd.merge:
         <ul>
-          <li><strong>Integrate Data:</strong> I demonstrated combining data from different sources (CSV and JSON) to create a unified dataset.</li>
-          <li><strong>Perform Data Analysis:</strong> I generated descriptive statistics and a pivot table to summarize and vizualize the data.</li>
+          <li><strong>Combined Data:</strong> I demonstrated combining data from different sources (CSV and JSON) to create a unified dataset.</li>
+          <li><strong>Analysis:</strong> I generated descriptive statistics and a pivot table to summarize and vizualize the data.</li>
         </ul>
       </div>
       
@@ -324,7 +324,7 @@
         GROUP BY State_Abbr, City
         ORDER BY State_Abbr, TotalRev DESC
 
-
+        --Stored procedures & Unions
         Exec usp_1_demo '2014', 'RAP', 'Abigail Morison'
         Exec usp_1_demo '2013', 'Country', 'All'
         Exec usp_1_demo 'All', 'All', 'All'
@@ -338,13 +338,14 @@
         select person_id, person 
         from Table_B
 
+        --more unions
         select Person, CAST(Person_id as VARCHAR(50))  
         from Table_A
         union 
         select Person, CAST(Person_id as VARCHAR(50)) 
         from Table_B
 
-        -- Datasource
+        --more unions
         select *, 'Table_A' as DataSource 
         from Table_A
         union 
@@ -352,6 +353,7 @@
         from Table_B
         order by Person 
 
+        --more union all
         SELECT 'Average Order Amount (Source = 4)' as Measure_Name, AVG(Total_Amount) as AVG_TOTAL_AMOUNT
         FROM Order_header
         WHERE Order_Source_Id = 4
@@ -375,7 +377,7 @@
         WHERE Order_Source_Id = 1
 
 
-        --Subqueries starts here 
+        --Subqueries & Parameters
         Select Order_Id,Total_Amount
         FROM Order_Header
         WHERE Total_Amount > (Select AVG(Total_Amount) FROM Order_Header)
@@ -393,15 +395,14 @@
         FROM Customer
         WHERE ZIp_Code LIKE '72%'
 
-        --Working with memories is  like temporary tables
+        --Working with memories is  like temp tables
 
         SELECT * 
         INTO #Customer_with_Zip_code_72
         FROM Customer
         WHERE ZIp_Code LIKE '72%'
 
-        SELECT * FROM #Customer_with_Zip_code_72
-
+        
         SELECT *
         FROM Order_Header OH
         INNER JOIN Customer C on OH.customer_id = C.Customer_id
