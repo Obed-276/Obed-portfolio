@@ -45,7 +45,7 @@
 
     <div class="description">
         This Python code demonstrates my ability to analyze and manipulate data to extract actionable insights for a business. 
-        By processing performance data, I identified revenue-generating trends, optimized operations, and informed marketing strategies, 
+        Although I perform simple data checks, subsequent manipulations identified some revenue-generating trends, and optimized operations, 
         ultimately contributing to increased profitability.
     </div>
 
@@ -80,7 +80,7 @@
         bandperf_df['Genre'] = bandperf_df['Genre'].fillna (genre).astype(object)
         bandperf_df.isnull().sum()
         
-        # Recheck for missing values, are they all Zero?
+        # Recheck for missing values to make sure
         bandperf_df.isnull().sum()
         
         # The State_Abbr field has Texas spelled out, replace the value with TX.
@@ -141,22 +141,25 @@
         # Import Python Libraries
         import pandas as pd  # data analysis Library
         import numpy as np  # use for working with numeric/math functions
+
         # Create a blank DataFrame named df_performances
         df_performances = pd.DataFrame()
+
         # Load data from the CSV file into the DataFrame
         df_performances = pd.read_csv('Performances_By_Venue_Zip.csv')
         
         # Print the results of your dataframe
         df_performances
         
-        # inspect the dataframe
-        ##summary of descriptive statistics
+        ## inspect the dataframe
+
+        #summary of descriptive statistics
         df_performances.describe(include='all')
         
-        ## Number of Rows and Columns
+        # number of Rows and Columns
         df_performances.shape
         
-        ## Summary of Column Names, Data Types and Nulls
+        # Summary of Column Names, Data Types and Nulls
         df_performances.info()
         
         # Create a blank DataFrame named df_zip_info
@@ -167,17 +170,19 @@
         # Print the results of your dataframe
         df_zip_info
         
-        # inspect your dataframe
-        ##summary of descriptive statistics
+        ## inspect the dataframe again
+
+        #summary of descriptive statistics
         df_zip_info.describe(include='all')
         
-        ## Number of Rows and Columns
+        # number of Rows and Columns
         df_zip_info.shape
         
-        ## Summary of Coloum Names, Data Types and Nulls
+        # summary of Coloum Names, Data Types and Nulls
         df_zip_info.info()
         
-        # Perform the join between df_performances and df_zip_info dataframes
+        # join df_performances and df_zip_info dataframes for further analysis
+
         df_performance_zip_stats = pd.merge(df_performances, df_zip_info,
                                             left_on='ZIP_CODE',
                                             right_on='zip_code_tabulation_area',
@@ -191,7 +196,8 @@
         df_performance_zip_stats[[
             'Venue_Name', 'STATE_ABBR', 'Average_Revenue_Amount', 'ZIP_CODE']]
         
-        # Format the columns
+        # Format the columns and generate pivot for visualizations
+        
         pivot_table['Total_Revenue_Amount'] = pivot_table[
             'Total_Revenue_Amount'].apply('${:,.2f}'.format)
         pivot_table['Average_Revenue_Amount'] = pivot_table[
