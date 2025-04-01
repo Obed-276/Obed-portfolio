@@ -176,3 +176,10 @@
   </div>
 </footer>
 
+<script>
+  fetch('https://obed-portfolio.onrender.com/log', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'Visited portfolio site' })
+  });
+</script>
