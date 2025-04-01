@@ -177,39 +177,51 @@
 </footer>
 
 <script>
-  fetch('https://obed-portfolio.onrender.com/log', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'Visited portfolio site' })
-  });
-</script>
-<script>
-  // Log unique user ID (basic version)
+  // Generate unique user ID if not stored
   let userId = localStorage.getItem("user_id");
   if (!userId) {
     userId = Math.floor(Math.random() * 1000000);
     localStorage.setItem("user_id", userId);
   }
 
-  // Optional: Track browser & user agent
   const browser = navigator.userAgent;
 
-  // Optional: Track IP using a public API
-  fetch('https://ipinfo.io/json?token=YOUR_TOKEN') // Replace with real token if needed
+  // Get IP and location from ipinfo.io
+  fetch('https://ipinfo.io/json?token=9d24b3ccfc0613')
     .then(response => response.json())
     .then(ipData => {
-      const logData = {
-        action: "Visited portfolio",
-        userId: userId,
-        browser: browser,
-        ip: ipData.ip,
-        location: ipData.city + ", " + ipData.country
-      };
+      const ip = ipData.ip;
+      const location = ipData.city + ', ' + ipData.country;
 
+      // Log initial visit
       fetch('https://obed-portfolio.onrender.com/log', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(logData)
+        body: JSON.stringify({
+          action: 'Visited portfolio site',
+          userId,
+          browser,
+          ip,
+          location
+        })
+      });
+
+      // Track and log link clicks
+      document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          const action = `Clicked: ${link.textContent.trim()} → ${link.href}`;
+          fetch('https://obed-portfolio.onrender.com/log', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action,
+              userId,
+              browser,
+              ip,
+              location
+            })
+          });
+        });
       });
     });
 </script>
