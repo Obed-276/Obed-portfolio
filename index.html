@@ -183,3 +183,33 @@
     body: JSON.stringify({ action: 'Visited portfolio site' })
   });
 </script>
+<script>
+  // Log unique user ID (basic version)
+  let userId = localStorage.getItem("user_id");
+  if (!userId) {
+    userId = Math.floor(Math.random() * 1000000);
+    localStorage.setItem("user_id", userId);
+  }
+
+  // Optional: Track browser & user agent
+  const browser = navigator.userAgent;
+
+  // Optional: Track IP using a public API
+  fetch('https://ipinfo.io/json?token=YOUR_TOKEN') // Replace with real token if needed
+    .then(response => response.json())
+    .then(ipData => {
+      const logData = {
+        action: "Visited portfolio",
+        userId: userId,
+        browser: browser,
+        ip: ipData.ip,
+        location: ipData.city + ", " + ipData.country
+      };
+
+      fetch('https://obed-portfolio.onrender.com/log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(logData)
+      });
+    });
+</script>
